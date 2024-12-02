@@ -1,0 +1,32 @@
+# Compiled source files
+/bin/
+/obj/
+
+# Build output
+*.exe
+*.dll
+*.pdb
+*.log
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+/.idea/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Logs and database
+*.log
+*.sql
+*.sqlite
+
+# App settings
+appsettings.Development.json
