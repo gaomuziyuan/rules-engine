@@ -17,7 +17,6 @@
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/Castle.Core.dll
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/Microsoft.AspNetCore.OpenApi.dll
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll
-/Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/Microsoft.Extensions.Logging.Abstractions.dll
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/Microsoft.OpenApi.dll
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/Microsoft.TestPlatform.CoreUtilities.dll
@@ -35,7 +34,6 @@
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/Swashbuckle.AspNetCore.Swagger.dll
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerUI.dll
-/Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/System.Diagnostics.DiagnosticSource.dll
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/xunit.abstractions.dll
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/xunit.assert.dll
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/xunit.core.dll
@@ -125,3 +123,12 @@
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/obj/project.assets.json
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/obj/project.packagespec.json
 /Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/obj/RulesEngine.Tests.csproj.nuget.dgspec.json
+/Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/appsettings.json
+/Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/global.json
+/Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.deps.json
+/Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.runtimeconfig.json
+/Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests.deps.json
+/Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests.runtimeconfig.json
+/Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/obj/project.assets.json
+/Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/obj/project.packagespec.json
+/Users/mavrick/Desktop/rules-engine/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/bin/Debug/net7.0/RulesEngine.Tests/obj/RulesEngine.Tests.csproj.nuget.dgspec.json

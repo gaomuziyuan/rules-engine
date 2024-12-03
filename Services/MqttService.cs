@@ -14,7 +14,7 @@ public class MqttService : IMqttService
     private const string Broker = "test.mosquitto.org";
     private const int Port = 1883;
 
-    public MqttService(ILogger<MqttService> logger, IRulesEngineService rulesEngineService, MqttFactory mqttFactory)
+    public MqttService(ILogger<MqttService> logger, IRulesEngineService rulesEngineService, IMqttFactory mqttFactory)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _rulesEngineService = rulesEngineService ?? throw new ArgumentNullException(nameof(rulesEngineService));

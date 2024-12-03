@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 
 // Add services to the container
 builder.Services.AddScoped<IRulesEngineService, RulesEngineService>();
+builder.Services.AddSingleton<IMqttFactory, MqttFactoryWrapper>();
 builder.Services.AddScoped<IMqttService, MqttService>();
 builder.Services.AddSingleton<MqttFactory>();
 

@@ -15,7 +15,7 @@ public class MqttServiceTests
     private readonly Mock<ILogger<MqttService>> _mockLogger;
     private readonly Mock<IRulesEngineService> _mockRulesEngineService;
     private readonly Mock<IMqttClient> _mockMqttClient;
-    private readonly Mock<MqttFactory> _mockMqttFactory;
+    private readonly Mock<IMqttFactory> _mockMqttFactory;
     private readonly MqttService _mqttService;
 
     public MqttServiceTests()
@@ -23,7 +23,7 @@ public class MqttServiceTests
         _mockLogger = new Mock<ILogger<MqttService>>();
         _mockRulesEngineService = new Mock<IRulesEngineService>();
         _mockMqttClient = new Mock<IMqttClient>();
-        _mockMqttFactory = new Mock<MqttFactory>();
+        _mockMqttFactory = new Mock<IMqttFactory>();
 
         _mockMqttFactory
             .Setup(f => f.CreateMqttClient())
@@ -94,8 +94,6 @@ public class MqttServiceTests
             SupplementAmount = 150.0f
         };
 
-        var messageEventArgs = CreateMockMessageReceivedEventArgs(inputData, "test-topic");
-
         _mockRulesEngineService
             .Setup(x => x.CalculateSupplement(It.IsAny<InputData>()))
             .Returns(expectedResult);
@@ -109,22 +107,32 @@ public class MqttServiceTests
                 userProperties: Array.Empty<MqttUserProperty>()
             ));
 
+        var messageEventArgs = new MqttApplicationMessageReceivedEventArgs(
+            clientId: "test-client",
+            applicationMessage: new MqttApplicationMessage
+            {
+                Topic = "BRE/calculateWinterSupplementInput/test-topic",
+                PayloadSegment = new ArraySegment<byte>(
+                    Encoding.UTF8.GetBytes(JsonSerializer.Serialize(inputData))
+                )
+            },
+            publishPacket: new MqttPublishPacket(),
+            acknowledgeHandler: (args, cancellationToken) => Task.CompletedTask
+        );
+
         // Act
         await _mqttService.StartAsync("test-topic");
+
         _mockMqttClient.Raise(
             m => m.ApplicationMessageReceivedAsync += null,
-            messageEventArgs
+            messageEventArgs,
+            CancellationToken.None
         );
 
         // Assert
         _mockRulesEngineService.Verify(
             x => x.CalculateSupplement(It.IsAny<InputData>()),
-            Times.Never
-        );
-
-        _mockMqttClient.Verify(
-            x => x.PublishAsync(It.IsAny<MqttApplicationMessage>(), default),
-            Times.Never
+            Times.Once
         );
 
         _mockMqttClient.Verify(
@@ -142,12 +150,107 @@ public class MqttServiceTests
                 LogLevel.Warning,
                 It.IsAny<EventId>(),
                 It.Is<It.IsAnyType>((o, t) => o.ToString().Contains("Failed to deserialize input data")),
-                It.IsAny<Exception>(),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()
+                It.IsAny<Exception?>(),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()
             ),
             Times.Once
         );
     }
+
+    // public async Task StartAsync_ShouldTriggerMessageReceivedHandler()
+    // {
+    //     // Arrange
+    //     var inputData = new InputData
+    //     {
+    //         Id = "test-id",
+    //         NumOfChildren = 2,
+    //         Composition = "Standard",
+    //         InPayForDec = true
+    //     };
+    //
+    //     var expectedResult = new OutputData
+    //     {
+    //         Id = "test-id",
+    //         IsEligible = true,
+    //         BaseAmount = 100.0f,
+    //         ChildrenAmount = 50.0f,
+    //         SupplementAmount = 150.0f
+    //     };
+    //
+    //     var messageEventArgs = CreateMockMessageReceivedEventArgs(inputData, "test-topic");
+    //
+    //     _mockRulesEngineService
+    //         .Setup(x => x.CalculateSupplement(It.IsAny<InputData>()))
+    //         .Returns(expectedResult);
+    //
+    //     _mockMqttClient
+    //         .Setup(x => x.PublishAsync(It.IsAny<MqttApplicationMessage>(), It.IsAny<CancellationToken>()))
+    //         .ReturnsAsync(new MqttClientPublishResult(
+    //             packetIdentifier: 1,
+    //             reasonCode: MqttClientPublishReasonCode.Success,
+    //             reasonString: "Success",
+    //             userProperties: Array.Empty<MqttUserProperty>()
+    //         ));
+    //
+    //     // Act
+    //     await _mqttService.StartAsync("test-topic");
+    //     _mockMqttClient.Raise(
+    //         m => m.ApplicationMessageReceivedAsync += null,
+    //         new MqttApplicationMessageReceivedEventArgs(
+    //             clientId: "test-client",
+    //             applicationMessage: new MqttApplicationMessage
+    //             {
+    //                 Topic = "BRE/calculateWinterSupplementInput/test-topic",
+    //                 PayloadSegment = new ArraySegment<byte>(
+    //                     Encoding.UTF8.GetBytes(JsonSerializer.Serialize(new InputData
+    //                     {
+    //                         Id = "test-id",
+    //                         NumOfChildren = 2,
+    //                         Composition = "Standard",
+    //                         InPayForDec = true
+    //                     }))
+    //                 )
+    //             },
+    //             publishPacket: new MqttPublishPacket(),
+    //             acknowledgeHandler: (args, cancellationToken) => Task.CompletedTask
+    //         ), 
+    //         CancellationToken.None
+    //     );
+    //
+    //
+    //
+    //     // Assert
+    //     _mockRulesEngineService.Verify(
+    //         x => x.CalculateSupplement(It.IsAny<InputData>()),
+    //         Times.Never
+    //     );
+    //
+    //     _mockMqttClient.Verify(
+    //         x => x.PublishAsync(It.IsAny<MqttApplicationMessage>(), default),
+    //         Times.Never
+    //     );
+    //
+    //     _mockMqttClient.Verify(
+    //         x => x.PublishAsync(
+    //             It.Is<MqttApplicationMessage>(
+    //                 m => m.Topic.Contains("BRE/calculateWinterSupplementOutput/test-topic")
+    //             ),
+    //             default
+    //         ),
+    //         Times.Once
+    //     );
+    //
+    //     _mockLogger.Verify(
+    //         x => x.Log(
+    //             LogLevel.Warning,
+    //             It.IsAny<EventId>(),
+    //             It.Is<It.IsAnyType>((o, t) => o.ToString().Contains("Failed to deserialize input data")),
+    //             It.IsAny<Exception>(),
+    //             It.IsAny<Func<It.IsAnyType, Exception, string>>()
+    //         ),
+    //         Times.Once
+    //     );
+    // }
 
     private MqttApplicationMessageReceivedEventArgs CreateMockMessageReceivedEventArgs(
         InputData inputData,
