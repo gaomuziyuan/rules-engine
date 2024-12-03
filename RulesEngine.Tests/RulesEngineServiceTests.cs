@@ -1,6 +1,5 @@
 using RulesEngine.Models;
 using RulesEngine.Services;
-using Xunit;
 
 namespace RulesEngine.Tests;
 

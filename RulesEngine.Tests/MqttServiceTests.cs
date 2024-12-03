@@ -1,12 +1,12 @@
 using System.Text;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 using Moq;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Packets;
 using RulesEngine.Models;
 using RulesEngine.Services;
-using Xunit;
 
 namespace RulesEngine.Tests;
 
